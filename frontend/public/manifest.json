@@ -1,0 +1,28 @@
+{
+  "name": "코드런 - 출퇴근 코딩 마이크로러닝",
+  "short_name": "코드런",
+  "description": "하루 10분, 출퇴근 시간에 코딩 실력을 키우세요",
+  "start_url": "/home",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
