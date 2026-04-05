@@ -23,6 +23,15 @@ class LessonController(
     private val getCourseLessonsUseCase: GetCourseLessonsUseCase,
     private val completeLessonUseCase: CompleteLessonUseCase,
 ) {
+    @GetMapping("/lessons/{lessonId}")
+    fun getLessonById(
+        @PathVariable lessonId: UUID,
+        authentication: Authentication,
+    ): ResponseEntity<LessonResult> {
+        val userId = UUID.fromString(authentication.principal as String)
+        return ResponseEntity.ok(getCourseLessonsUseCase.getLessonById(lessonId, userId))
+    }
+
     @GetMapping("/courses/{courseId}/lessons")
     fun getLessonsByCourse(
         @PathVariable courseId: UUID,
