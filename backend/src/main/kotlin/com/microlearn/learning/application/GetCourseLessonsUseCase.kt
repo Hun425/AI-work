@@ -9,6 +9,7 @@ import com.microlearn.learning.domain.repository.ProgressRepository
 import com.microlearn.learning.domain.service.NextLessonRecommender
 import com.microlearn.shared.domain.exception.CategoryNotFoundException
 import com.microlearn.shared.domain.exception.CourseNotFoundException
+import com.microlearn.shared.domain.exception.LessonNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
@@ -69,5 +70,23 @@ class GetCourseLessonsUseCase(
                     score = progress?.score,
                 )
             }
+    }
+
+    @Transactional(readOnly = true)
+    fun getLessonById(lessonId: UUID, userId: UUID): LessonResult {
+        val lesson = lessonRepository.findById(lessonId)
+            ?: throw LessonNotFoundException(lessonId.toString())
+
+        val progress = progressRepository.findByUserIdAndLessonId(userId, lessonId)
+
+        return LessonResult(
+            id = lesson.id.toString(),
+            titleKo = lesson.titleKo,
+            lessonType = lesson.lessonType.name,
+            content = lesson.content.rawJson,
+            estimatedSeconds = lesson.estimatedSeconds,
+            isCompleted = progress != null,
+            score = progress?.score,
+        )
     }
 }

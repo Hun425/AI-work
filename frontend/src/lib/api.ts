@@ -46,6 +46,8 @@ export const api = {
       fetchApi<Lesson[]>(`/api/courses/${courseId}/lessons`),
   },
   lessons: {
+    get: (lessonId: string) =>
+      fetchApi<Lesson>(`/api/lessons/${lessonId}`),
     complete: (lessonId: string, data: CompleteLessonReq) =>
       fetchApi<LessonCompletionRes>(`/api/lessons/${lessonId}/complete`, {
         method: "POST",
